@@ -11,11 +11,11 @@ screen.title('PingPong')
 
 screen.tracer(0)
 
-#三个实体
+#四个实体
 r_paddle = Paddle((350,0))
 l_paddle = Paddle((-350,0))
 ball = Ball()
-
+scoreboard = Scoreboard()
 
 screen.listen()
 
@@ -28,21 +28,19 @@ screen.onkey(l_paddle.go_down,'s')
 
 game_is_on = True
 while game_is_on:
-    time.sleep(ball.move_speed)
+    time.sleep(0.01) #添加短暂的延时，降低更新频率
     screen.update()
     ball.move()
-    scoreboard = Scoreboard()
     
     # 检测上下边界
-    if ball.ycor() > 280 or ball.ycor() < -280:
+    #if ball.ycor() > 280 or ball.ycor() < -280:
+    if abs(ball.ycor()) > 280:
         ball.bounce_y()
         
         
     #检测球和球拍的碰撞
     if ball.distance(r_paddle) < 50 and ball.xcor() > 325 or ball.distance(l_paddle) < 50 and ball.xcor() <-325:
-        ball.bounce_x()
-        
-        ball.move_speed *= 0.9#接到球后球速变快，难度增加
+        ball.bounce_x()       #接到球后难度增加，加速。
         
     
     #检测接不到球, 失球和分数变化
@@ -58,16 +56,6 @@ while game_is_on:
         ball.reposition()    #重新发球。重置位置、方向、球速
         
         
-
-
-
-
-
-
-
-
-
-
 
 
 screen.exitonclick()
