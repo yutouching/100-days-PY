@@ -44,6 +44,7 @@ while game_is_on:
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
         print("Hit the wall")           #调试信息
         if scoreboard.game_over():
+            scoreboard.reset()
             game_is_on = False
         else:
             scoreboard.reset()
@@ -59,6 +60,7 @@ while game_is_on:
         if snake.head.distance(seg) < 10: #如果蛇头和身体部分的距离过小（撞了）
             print("Hit itself")         #调试信息
             if scoreboard.game_over():
+                scoreboard.reset()
                 game_is_on = False
             else:
                 scoreboard.reset()
