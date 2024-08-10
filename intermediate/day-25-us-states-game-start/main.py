@@ -32,9 +32,11 @@ while len(guess_state) < GUESSNUMBER:
 
 
     if answer_state is None or answer_state == 'Exit':
-        miss_state = []
-        for state in all_state:
-            miss_state.append(state)
+        # miss_state = []                                                           original code
+        # for state in all_state:
+        #     if state not in guess_state:
+        #         miss_state.append(state)
+        miss_state = [state for state in all_state if state not in guess_state]     #use list comprehension
 
         miss_file = pd.DataFrame(miss_state)
         miss_file.to_csv('state_to_learn.csv')
